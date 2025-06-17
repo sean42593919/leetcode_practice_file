@@ -104,7 +104,7 @@ def longestPalindrome(self, s: str) -> str:
         while(find):#odd
             if s[i+counter]==s[i-counter]:
                 counter+=1
-                if ((i+counter)>=strlen) and ((i-counter)<0):
+                if ((i+counter)>=strlen) or ((i-counter)<0):
                     counter-=1
                     Pallist.append(s[i-counter:i+counter+1])
                     find=False
@@ -113,15 +113,27 @@ def longestPalindrome(self, s: str) -> str:
                 Pallist.append(s[i-counter:i+counter+1])
                 break
         counter=0
-        while(True):#even
+        find=True
+        while(find):#even
             if s[i+counter]==s[i-counter-1]:
                 counter+=1
+                if ((i+counter)>=strlen) or ((i-counter-1)<0):
+                    counter-=1
+                    Pallist.append(s[i-counter-1:i+counter+1])
+                    find=False
             else:
                 counter-=1
                 Pallist.append(s[i-counter-1:i+counter+1])
                 break
-    if not Pallist:
-        return s[0]
-    else: return max(Pallist,key=len)
-
-s="cbbd"
+        if i==strlen-2:
+            if s[i]==s[i+1]:
+                Pallist.append(s[i:i+2])
+    if strlen==1:
+        return s
+    elif strlen==2:
+        if s[0]==s[1]:
+            return s
+        else:
+            return s[0]
+    else: 
+        return max(Pallist,key=len)
