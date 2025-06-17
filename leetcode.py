@@ -100,12 +100,25 @@ def longestPalindrome(self, s: str) -> str:
     Pallist=[]
     for i in range(1,strlen-1):
         counter=1
-        while(True):#odd
+        find=True
+        while(find):#odd
             if s[i+counter]==s[i-counter]:
                 counter+=1
+                if ((i+counter)>=strlen) and ((i-counter)<0):
+                    counter-=1
+                    Pallist.append(s[i-counter:i+counter+1])
+                    find=False
             else:
                 counter-=1
                 Pallist.append(s[i-counter:i+counter+1])
+                break
+        counter=0
+        while(True):#even
+            if s[i+counter]==s[i-counter-1]:
+                counter+=1
+            else:
+                counter-=1
+                Pallist.append(s[i-counter-1:i+counter+1])
                 break
     if not Pallist:
         return s[0]
