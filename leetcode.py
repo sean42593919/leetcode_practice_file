@@ -94,3 +94,23 @@ def minMaxDifference(self, num: int) -> int:
     MIN_num=int(str(num).replace(str(MD),'0'))
     NEW_num=abs(MAX_num-MIN_num)
     return NEW_num
+#longestPalindrome
+def longestPalindrome(self, s: str) -> str:
+    strlen=len(s)
+    Pallist=[]
+    for i in range(1,strlen-1):
+        counter=1
+        while(True):
+            if s[i+counter]==s[i-counter]:
+                counter+=1
+            else:
+                counter-=1
+                Pallist.append(s[i+counter:i-counter])
+                find=True
+            if find==True:
+                break
+    if Pallist==None:
+        return s[0]
+    else: return max(Pallist,key=len)
+
+s="ababd"
