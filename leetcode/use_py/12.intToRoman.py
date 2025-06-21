@@ -10,4 +10,7 @@ class Solution:
         num=num%10
         for i in range(k):
             list_R.append("M")
+            if h==400:
+                list_R.append("M")
+
         
